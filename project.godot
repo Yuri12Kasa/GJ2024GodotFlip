@@ -13,3 +13,11 @@ config_version=5
 config/name="Gj 2024 Godot Flip"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[filesystem]
+
+import/fbx/enabled=false
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.605438, 0.325034, 0.470259, 1)
