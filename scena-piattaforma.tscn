@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ya5k212h81b"]
+[gd_scene load_steps=4 format=3 uid="uid://bsxuh1e63we64"]
 
 [ext_resource type="PackedScene" uid="uid://lf4aa0ptsuhw" path="res://piattaforma.glb" id="1_lhq76"]
 [ext_resource type="PackedScene" uid="uid://bt3swxattea26" path="res://spuntoni.glb" id="2_1vibg"]

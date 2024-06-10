@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0nh34y3lfwl0"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_7qywh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xhsw0"]
+radius = 0.167571
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_7qywh")
+
+[node name="Jump Destination" type="Area3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23957, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Jump Destination"]
+shape = SubResource("SphereShape3D_xhsw0")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Jump Destination"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="Model" type="CSGSphere3D" parent="."]
+
+[node name="Min Jump" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.08165e-12, 2.08165e-12)
+
+[node name="Max Jump" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.08165e-12, 2.08165e-12)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="Jump Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
