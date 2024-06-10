@@ -1,17 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://ya5k212h81b"]
+[gd_scene load_steps=8 format=3 uid="uid://ya5k212h81b"]
 
 [ext_resource type="PackedScene" uid="uid://lf4aa0ptsuhw" path="res://piattaforma.glb" id="1_lhq76"]
 [ext_resource type="PackedScene" uid="uid://bt3swxattea26" path="res://spuntoni.glb" id="2_1vibg"]
 
+[sub_resource type="Gradient" id="Gradient_khxrq"]
+colors = PackedColorArray(0.950598, 0.557254, 1, 1, 1, 0.780392, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ne6tk"]
+gradient = SubResource("Gradient_khxrq")
+fill_from = Vector2(0.0274725, 0)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_gkdfb"]
+panorama = SubResource("GradientTexture2D_ne6tk")
+
+[sub_resource type="Sky" id="Sky_xmr3h"]
+sky_material = SubResource("PanoramaSkyMaterial_gkdfb")
+process_mode = 1
+
 [sub_resource type="Environment" id="Environment_bf5ly"]
-background_mode = 1
-background_color = Color(0.858648, 0.65928, 0.82658, 1)
+background_mode = 2
+background_color = Color(0.647502, 0.36399, 0.610907, 1)
+sky = SubResource("Sky_xmr3h")
+sky_custom_fov = 15.2
+sky_rotation = Vector3(-0.368264, 0.736529, -1.5708)
+ssr_enabled = true
+volumetric_fog_density = 0.0948
+volumetric_fog_albedo = Color(0.600967, 0.301278, 0.571679, 1)
+volumetric_fog_length = 28.2
 
 [node name="Node3D" type="Node3D"]
 
 [node name="piattaforma" parent="." instance=ExtResource("1_lhq76")]
 
-[node name="spuntoni" parent="." instance=ExtResource("2_1vibg")]
+[node name="spuntoni" parent="piattaforma" instance=ExtResource("2_1vibg")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.726695, -0.250667, 0.639594, 0, 0.931049, 0.364893, -0.686961, -0.265166, 0.676589, 5.98529, 3.47592, 6.50221)
