@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bt3swxattea26"
-path="res://.godot/imported/spuntoni.glb-99c19ea299a631e09d3d8f3436ab1696.scn"
+path="res://.godot/imported/spuntoni.glb-0f702fff60809210f739013ac03c5b8f.scn"
 
 [deps]
 
-source_file="res://spuntoni.glb"
-dest_files=["res://.godot/imported/spuntoni.glb-99c19ea299a631e09d3d8f3436ab1696.scn"]
+source_file="res://Platform/spuntoni.glb"
+dest_files=["res://.godot/imported/spuntoni.glb-0f702fff60809210f739013ac03c5b8f.scn"]
 
 [params]
 

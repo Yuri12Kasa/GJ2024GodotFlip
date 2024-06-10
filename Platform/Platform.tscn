@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsxuh1e63we64"]
+
+[ext_resource type="Script" path="res://Platform/Platform.gd" id="1_gtsao"]
+[ext_resource type="PackedScene" uid="uid://lf4aa0ptsuhw" path="res://Platform/piattaforma.glb" id="2_2xtcf"]
+[ext_resource type="PackedScene" uid="uid://bt3swxattea26" path="res://Platform/spuntoni.glb" id="3_k5xjp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kkpwa"]
+size = Vector3(1.99939, 0.150879, 2.00195)
+
+[node name="Platform" type="CharacterBody3D"]
+script = ExtResource("1_gtsao")
+
+[node name="piattaforma" parent="." instance=ExtResource("2_2xtcf")]
+
+[node name="spuntoni" parent="." instance=ExtResource("3_k5xjp")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("BoxShape3D_kkpwa")
+
+[node name="Flip Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true
+
+[node name="Flipping Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="Flip Timer" to="." method="_on_flip_timer_timeout"]

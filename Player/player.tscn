@@ -31,3 +31,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.08165e-12, 2.08165e-12)
 [node name="Jump Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+
+[connection signal="body_entered" from="Jump Destination" to="." method="_on_jump_destination_body_entered"]
+[connection signal="body_exited" from="Jump Destination" to="." method="_on_jump_destination_body_exited"]
