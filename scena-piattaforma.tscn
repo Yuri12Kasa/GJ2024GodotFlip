@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ya5k212h81b"]
+[gd_scene load_steps=9 format=3 uid="uid://ya5k212h81b"]
 
 [ext_resource type="PackedScene" uid="uid://lf4aa0ptsuhw" path="res://piattaforma.glb" id="1_lhq76"]
 [ext_resource type="PackedScene" uid="uid://bt3swxattea26" path="res://spuntoni.glb" id="2_1vibg"]
+[ext_resource type="PackedScene" uid="uid://go88wu81wxw7" path="res://character.glb" id="3_wfnf1"]
 
 [sub_resource type="Gradient" id="Gradient_khxrq"]
 colors = PackedColorArray(0.950598, 0.557254, 1, 1, 1, 0.780392, 1, 1)
@@ -24,6 +25,9 @@ sky = SubResource("Sky_xmr3h")
 sky_custom_fov = 15.2
 sky_rotation = Vector3(-0.368264, 0.736529, -1.5708)
 ssr_enabled = true
+ssao_enabled = true
+sdfgi_use_occlusion = true
+glow_enabled = true
 volumetric_fog_density = 0.0948
 volumetric_fog_albedo = Color(0.600967, 0.301278, 0.571679, 1)
 volumetric_fog_length = 28.2
@@ -40,3 +44,6 @@ environment = SubResource("Environment_bf5ly")
 projection = 1
 fov = 72.1144
 size = 6.40157
+
+[node name="character" parent="." instance=ExtResource("3_wfnf1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.150123, 4.76837e-07, -0.155368)
