@@ -1,7 +1,11 @@
-extends Node3D
+extends CharacterBody3D
 
 @export var jump_destination_speed : float = 1
 @export var jump_duration : float = 0.5
+
+signal platform_reached(flipped)
+
+var gravity = 0
 
 var mouse_pressed : bool
 var destination_point_up : bool = true
@@ -10,6 +14,7 @@ var destination : Vector3
 var is_jumping : bool
 
 var target_platform
+var reaching_platform : bool
 
 var timer : float = 0
 
@@ -23,6 +28,9 @@ func _process(delta):
 	
 	if(is_jumping): 
 		lerp_jump()
+	
+	velocity.y += delta * gravity
+	move_and_slide()
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -37,6 +45,8 @@ func _input(event):
 			%"Jump Destination".show()
 
 func reset_jump_destination():
+	reaching_platform = false
+	target_platform = null
 	$"Jump Destination".position = $"Min Jump".position
 	timer = 0
 	destination_point_up = true
@@ -47,9 +57,12 @@ func start_lerp_player_to_destination():
 	is_jumping = true
 	start_position = global_position
 	if(target_platform):
+		target_platform.stop_flip_and_move()
 		destination = target_platform.global_position
+		reaching_platform = true
 	else:
 		destination = %"Jump Destination".global_position
+		gravity = -10
 
 func lerp_jump_destination(delta):
 	timer += delta * 0.4
@@ -73,6 +86,8 @@ func lerp_jump():
 	global_position = start_position.lerp(destination, t)
 	if(t >= 1):
 		is_jumping = false
+		if reaching_platform:
+			platform_reached.emit(target_platform.flipped)
 		reset_jump_destination()
 
 func _on_jump_destination_body_entered(body):
@@ -80,5 +95,5 @@ func _on_jump_destination_body_entered(body):
 		target_platform = body
 
 func _on_jump_destination_body_exited(body):
-	if(body.has_method("is_platform") && body == target_platform):
+	if(body.has_method("is_platform") && body == target_platform && !reaching_platform):
 		target_platform = null

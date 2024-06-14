@@ -2,21 +2,46 @@ extends Node3D
 
 const PLATFORM = preload("res://Platform/Platform.tscn")
 
-func _ready():
-	spawn_platform()
+var spawn_points = []
 
-func spawn_platform():
-	var new_platform1 = PLATFORM.instantiate()
-	new_platform1.global_position = %SpawnPoint1.position
-	new_platform1.global_position = %SpawnPoint1.position
-	get_tree().current_scene.add_child(new_platform1)
-	
-	var new_platform2 = PLATFORM.instantiate()
-	new_platform2.global_position = %SpawnPoint2.position
-	new_platform2.global_position = %SpawnPoint2.position
-	get_tree().current_scene.add_child(new_platform2)
-	
-	var new_platform3 = PLATFORM.instantiate()
-	new_platform3.global_position = %SpawnPoint3.position
-	new_platform3.global_position = %SpawnPoint3.position
-	get_tree().current_scene.add_child(new_platform3)
+func _ready():
+	init_spawn_points_array()
+	spawn_rnd_platform()
+
+func _process(delta):
+	check_game_over()
+
+func init_spawn_points_array():
+	spawn_points.push_back(%SpawnPoint1)
+	spawn_points.push_back(%SpawnPoint2)
+	spawn_points.push_back(%SpawnPoint3)
+
+func spawn_rnd_platform():
+	var spawn_point_size = spawn_points.size()
+	var spawn_order = []
+	for n in spawn_point_size:
+		spawn_order.push_back(n) 
+	spawn_order.shuffle()
+	var chance_increase = 100 / spawn_point_size 
+	for n in spawn_point_size:
+		var chance = randi_range(0, 100)
+		if (chance <= (chance_increase * (n + 1))):
+			spawn_platform(spawn_points[spawn_order[n]])
+
+func spawn_platform(spawn_point):
+	var new_platform = PLATFORM.instantiate()
+	new_platform.global_position = spawn_point.global_position
+	get_tree().current_scene.add_child(new_platform)
+
+func _on_player_platform_reached(flipped):
+	if flipped:
+		game_over()
+	else:
+		spawn_rnd_platform()
+
+func check_game_over():
+	if($Player.position.y < -5):
+		game_over()
+
+func game_over():
+	get_tree().reload_current_scene()

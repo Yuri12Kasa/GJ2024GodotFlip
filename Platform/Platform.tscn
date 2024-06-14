@@ -9,6 +9,7 @@ size = Vector3(1.99939, 0.150879, 2.00195)
 
 [node name="Platform" type="CharacterBody3D"]
 script = ExtResource("1_gtsao")
+horizontal_max_distance = 4.0
 
 [node name="piattaforma" parent="." instance=ExtResource("2_2xtcf")]
 
@@ -26,4 +27,9 @@ autostart = true
 unique_name_in_owner = true
 one_shot = true
 
+[node name="Horizontal Move Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true
+
 [connection signal="timeout" from="Flip Timer" to="." method="_on_flip_timer_timeout"]
+[connection signal="timeout" from="Horizontal Move Timer" to="." method="_on_horizontal_move_timer_timeout"]

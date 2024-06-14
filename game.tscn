@@ -12,15 +12,16 @@ script = ExtResource("1_5nigo")
 
 [node name="Player" parent="." instance=ExtResource("1_044f0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-jump_destination_speed = 0.4
+jump_destination_speed = 0.2
+jump_duration = 0.3
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(0.726695, -0.250667, 0.639594, 0, 0.931049, 0.364893, -0.686961, -0.265166, 0.676589, 5.98529, 3.47592, 6.50221)
+transform = Transform3D(0.726695, -0.250667, 0.639594, 0, 0.931049, 0.364893, -0.686961, -0.265166, 0.676589, 11.935, 2.426, 6.502)
 environment = SubResource("Environment_gue18")
 projection = 1
 current = true
 fov = 72.1144
-size = 6.40157
+size = 9.577
 
 [node name="SpawnPoint1" type="Node3D" parent="Player"]
 unique_name_in_owner = true
@@ -33,3 +34,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.08165e-12, 2.08165e-12)
 [node name="SpawnPoint3" type="Node3D" parent="Player"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.08165e-12, 4)
+
+[connection signal="platform_reached" from="Player" to="." method="_on_player_platform_reached"]

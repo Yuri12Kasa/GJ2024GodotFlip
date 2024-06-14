@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0nh34y3lfwl0"]
+[gd_scene load_steps=4 format=3 uid="uid://c0nh34y3lfwl0"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_7qywh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8crrj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xhsw0"]
 radius = 0.167571
 
-[node name="Player" type="Node3D"]
+[node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_7qywh")
+jump_destination_speed = 0.05
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_8crrj")
+disabled = true
 
 [node name="Jump Destination" type="Area3D" parent="."]
 unique_name_in_owner = true
@@ -19,6 +26,7 @@ shape = SubResource("SphereShape3D_xhsw0")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 
 [node name="Model" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.5, 2.08165e-12)
 
 [node name="Min Jump" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.08165e-12, 2.08165e-12)
