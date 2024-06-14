@@ -10,6 +10,7 @@ radius = 0.167571
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_7qywh")
 jump_destination_speed = 0.05
+jump_duration = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_8crrj")

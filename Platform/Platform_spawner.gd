@@ -31,6 +31,8 @@ func spawn_rnd_platform():
 func spawn_platform(spawn_point):
 	var new_platform = PLATFORM.instantiate()
 	new_platform.global_position = spawn_point.global_position
+	var new_flip_time = randf_range(new_platform.min_flip_time, new_platform.max_flip_time)
+	new_platform.flip_time = new_flip_time
 	get_tree().current_scene.add_child(new_platform)
 
 func _on_player_platform_reached(flipped):

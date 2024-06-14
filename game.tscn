@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cj0jx4fodak2s"]
+[gd_scene load_steps=5 format=3 uid="uid://cj0jx4fodak2s"]
 
 [ext_resource type="Script" path="res://Platform/Platform_spawner.gd" id="1_5nigo"]
 [ext_resource type="PackedScene" uid="uid://c0nh34y3lfwl0" path="res://Player/player.tscn" id="1_044f0"]
+[ext_resource type="Script" path="res://Camera.gd" id="3_bpka6"]
 
 [sub_resource type="Environment" id="Environment_gue18"]
 background_mode = 1
@@ -15,14 +16,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 jump_destination_speed = 0.2
 jump_duration = 0.3
 
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(0.726695, -0.250667, 0.639594, 0, 0.931049, 0.364893, -0.686961, -0.265166, 0.676589, 11.935, 2.426, 6.502)
-environment = SubResource("Environment_gue18")
-projection = 1
-current = true
-fov = 72.1144
-size = 9.577
-
 [node name="SpawnPoint1" type="Node3D" parent="Player"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.08165e-12, -4)
@@ -34,5 +27,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.08165e-12, 2.08165e-12)
 [node name="SpawnPoint3" type="Node3D" parent="Player"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.08165e-12, 4)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.726695, -0.250667, 0.639594, 0, 0.931049, 0.364893, -0.686961, -0.265166, 0.676589, 11.935, 2.426, 6.502)
+environment = SubResource("Environment_gue18")
+projection = 1
+current = true
+fov = 72.1144
+size = 9.577
+script = ExtResource("3_bpka6")
 
 [connection signal="platform_reached" from="Player" to="." method="_on_player_platform_reached"]

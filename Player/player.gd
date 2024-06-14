@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @export var jump_destination_speed : float = 1
 @export var jump_duration : float = 0.5
+@export var jump_height : float = 5
 
 signal platform_reached(flipped)
 
@@ -83,7 +84,10 @@ func lerp_jump_destination(delta):
 
 func lerp_jump():
 	var t = (jump_duration - %"Jump Timer".time_left) / jump_duration
+	var y = -jump_height * pow(t, 2) + (jump_height * t)
+	#destination.y = y
 	global_position = start_position.lerp(destination, t)
+	global_position.y = y
 	if(t >= 1):
 		is_jumping = false
 		if reaching_platform:
