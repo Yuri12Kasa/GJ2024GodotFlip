@@ -23,10 +23,13 @@ fov = 72.1144
 size = 6.40157
 
 [node name="SpawnPoint1" type="Node3D" parent="Player"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.08165e-12, -4)
 
 [node name="SpawnPoint2" type="Node3D" parent="Player"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.08165e-12, 2.08165e-12)
 
 [node name="SpawnPoint3" type="Node3D" parent="Player"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.08165e-12, 4)

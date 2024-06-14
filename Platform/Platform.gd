@@ -26,7 +26,6 @@ func _process(delta):
 			quaternion = start_rotation.slerp(end_rotation, t)
 
 func flip():
-	print("flip")
 	flipping = true
 	%"Flipping Timer".start()
 	if(flipped):
