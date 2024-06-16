@@ -1,6 +1,7 @@
 extends Node3D
 
 const PLATFORM = preload("res://Platform/Platform.tscn")
+const DESTRUCTION_EFFECT = preload("res://Platform/platform_destruction_effect.tscn")
 
 var spawn_points = []
 var spawned_platforms = []
@@ -42,6 +43,9 @@ func stop_spawned_platforms():
 func _on_player_platform_reached(platform):
 	for n in spawned_platforms.size():
 		if(platform != spawned_platforms[n]):
+			var new_destruction_effect = DESTRUCTION_EFFECT.instantiate()
+			add_child(new_destruction_effect)
+			new_destruction_effect.global_position = spawned_platforms[n].global_position
 			spawned_platforms[n].remove()
 	spawned_platforms.clear()
 	if platform.flipped:

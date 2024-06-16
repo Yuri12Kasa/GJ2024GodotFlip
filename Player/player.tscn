@@ -26,6 +26,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23957, 0, 0)
 
 [node name="Target Collider" type="CollisionShape3D" parent="Jump Destination"]
+transform = Transform3D(2.51, 0, 0, 0, 2.51, 0, 0, 0, 2.51, 0, 0, 0)
 shape = SubResource("SphereShape3D_xhsw0")
 
 [node name="Target Sprite" type="Sprite3D" parent="Jump Destination"]
@@ -45,6 +46,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.08165e-12, 2.08165e-12)
 [node name="Jump Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="Score Label" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 57.0
+offset_right = 196.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(0.54902, 0, 0.87451, 1)
+theme_override_font_sizes/font_size = 40
+text = "Score : 0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="body_entered" from="Jump Destination" to="." method="_on_jump_destination_body_entered"]
 [connection signal="body_exited" from="Jump Destination" to="." method="_on_jump_destination_body_exited"]
