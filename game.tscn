@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cj0jx4fodak2s"]
+[gd_scene load_steps=6 format=3 uid="uid://cj0jx4fodak2s"]
 
 [ext_resource type="Script" path="res://Platform/Platform_spawner.gd" id="1_5nigo"]
 [ext_resource type="PackedScene" uid="uid://c0nh34y3lfwl0" path="res://Player/player.tscn" id="1_044f0"]
 [ext_resource type="Script" path="res://Camera.gd" id="3_bpka6"]
+[ext_resource type="PackedScene" uid="uid://lf4aa0ptsuhw" path="res://Platform/piattaforma.glb" id="4_36nyf"]
 
 [sub_resource type="Environment" id="Environment_gue18"]
 background_mode = 1
@@ -38,6 +39,9 @@ size = 9.577
 script = ExtResource("3_bpka6")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="piattaforma" parent="." instance=ExtResource("4_36nyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [connection signal="jump" from="Player" to="." method="_on_player_jump"]
 [connection signal="platform_reached" from="Player" to="." method="_on_player_platform_reached"]

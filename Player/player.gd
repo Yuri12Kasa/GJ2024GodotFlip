@@ -17,6 +17,7 @@ var destination_point_up : bool = true
 var start_position : Vector3
 var destination : Vector3
 var is_jumping : bool
+var score : int = 0
 
 var target_platform
 var reaching_platform : bool
@@ -38,6 +39,8 @@ func _process(delta):
 	move_and_slide()
 
 func _input(event):
+	if(gravity == -10):
+		return
 	if event is InputEventMouseButton:
 		if(mouse_pressed):
 			print("Mouse released")
@@ -97,6 +100,8 @@ func lerp_jump():
 		is_jumping = false
 		if reaching_platform:
 			platform_reached.emit(target_platform)
+			score += 1
+			%"Score Label".text = "Score : " + str(score)
 		reset_jump_destination()
 
 func _on_jump_destination_body_entered(body):
