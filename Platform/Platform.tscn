@@ -1,13 +1,135 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsxuh1e63we64"]
+[gd_scene load_steps=23 format=3 uid="uid://bsxuh1e63we64"]
 
 [ext_resource type="Script" path="res://Platform/Platform.gd" id="1_gtsao"]
 [ext_resource type="PackedScene" uid="uid://lf4aa0ptsuhw" path="res://Platform/piattaforma.glb" id="2_2xtcf"]
 [ext_resource type="PackedScene" uid="uid://bt3swxattea26" path="res://Platform/spuntoni.glb" id="3_k5xjp"]
+[ext_resource type="Texture2D" uid="uid://yn4jarcsb8eq" path="res://Platform/CircleSpriteSheet .png" id="4_p3wef"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kkpwa"]
 size = Vector3(1.99939, 0.150879, 2.00195)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnmjh"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(0, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj5ve"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(400, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xequy"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(0, 400, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfk41"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(400, 400, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xice8"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(800, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lietd"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(800, 400, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks6w8"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(1200, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqnsp"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(1200, 400, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyeex"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(0, 800, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5g4b"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(0, 1200, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dsnq"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(400, 800, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fjgy"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(800, 800, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efukg"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(400, 1200, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_renk7"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(800, 1200, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvfuu"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(1200, 800, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_buaq5"]
+atlas = ExtResource("4_p3wef")
+region = Rect2(1200, 1200, 400, 400)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ynasi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnmjh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj5ve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xequy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfk41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xice8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lietd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ks6w8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqnsp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyeex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5g4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dsnq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fjgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efukg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_renk7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvfuu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_buaq5")
+}],
+"loop": true,
+"name": &"Progress",
+"speed": 1.0
+}]
+
 [node name="Platform" type="CharacterBody3D"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0, 0, 0)
 script = ExtResource("1_gtsao")
 
 [node name="piattaforma" parent="." instance=ExtResource("2_2xtcf")]
@@ -20,7 +142,6 @@ shape = SubResource("BoxShape3D_kkpwa")
 
 [node name="Flip Timer" type="Timer" parent="."]
 unique_name_in_owner = true
-autostart = true
 
 [node name="Flipping Timer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -28,11 +149,23 @@ one_shot = true
 
 [node name="Horizontal Move Timer" type="Timer" parent="."]
 unique_name_in_owner = true
-autostart = true
 
 [node name="Vertical Move Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 autostart = true
+
+[node name="Up Flip Timer Feedback" type="AnimatedSprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, -1.5246e-23, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0, 0, 0)
+modulate = Color(0.823529, 0.180392, 0.980392, 1)
+sprite_frames = SubResource("SpriteFrames_ynasi")
+animation = &"Progress"
+
+[node name="Down Flip Timer Feedback" type="AnimatedSprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1.31134e-07, 1, -3.82137e-15, -4.37114e-08, 1.91069e-15, -1, -1, 1.31134e-07, 4.37114e-08, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_ynasi")
+animation = &"Progress"
 
 [connection signal="timeout" from="Flip Timer" to="." method="_on_flip_timer_timeout"]
 [connection signal="timeout" from="Horizontal Move Timer" to="." method="_on_horizontal_move_timer_timeout"]

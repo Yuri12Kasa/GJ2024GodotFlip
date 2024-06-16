@@ -1,14 +1,12 @@
 extends CharacterBody3D
 
-@export var flip_time : float = 2.5 # time between one flip and another
 @export var min_flip_time : float = 1
 @export var max_flip_time : float = 4
 var flipping_time : float = 0.2 # time to flip the platform upside down
 
-@export var horizontal_move_time : float = 2
+@export var horizontal_min_move_time : float = 2
+@export var horizontal_max_move_time : float = 4
 @export var horizontal_max_distance : float = 4
-#@export var vertical_move_time : float = 2
-#@export var vertical_max_distance : float = 4
 
 var flipping : bool
 var flipped : bool #if flipped kills the player
@@ -23,31 +21,48 @@ var end_rotation
 
 var can_move : bool = true
 var moving_right : bool = true
-#var moving_up : bool = true
-
-#var can_move_vertical = true
 
 func is_platform():
 	return true
 
 func _ready():
-	%"Flip Timer".wait_time = flip_time
-	%"Flipping Timer".wait_time = flipping_time
-	%"Horizontal Move Timer".wait_time = horizontal_move_time
-	#%"Vertical Move Timer".wait_time = vertical_move_time
-	start_position = global_position;
-	start_lerp_position = global_position
-	end_horizontal_lerp_position = start_position + Vector3(0,0,horizontal_max_distance)
-	#end_vertical_lerp_position = start_position + Vector3(vertical_max_distance, 0, 0)
+	init_flip_stats()
+	init_move_stats()
+	start_flip_timer()
+
+
+func init_flip_stats():
+	%"Flip Timer".wait_time = randf_range(min_flip_time, max_flip_time)
+	%"Flip Timer".start()
 	
+	%"Flipping Timer".wait_time = flipping_time
+func init_move_stats():
+	start_position = global_position;
+	
+	moving_right = randi_range(0,1)
+	if(!moving_right):
+		start_lerp_position = global_position
+		end_horizontal_lerp_position = start_position - Vector3(0,0,horizontal_max_distance)
+	else:
+		start_lerp_position = global_position
+		end_horizontal_lerp_position = start_position + Vector3(0,0,horizontal_max_distance)
+	
+	%"Horizontal Move Timer".wait_time = randf_range(horizontal_min_move_time, horizontal_max_move_time)
+	%"Horizontal Move Timer".start()
+func start_flip_timer():
+	%"Up Flip Timer Feedback".speed_scale = 16 / %"Flip Timer".wait_time
+	%"Down Flip Timer Feedback".speed_scale = 16 / %"Flip Timer".wait_time
+	if(!flipped):
+		%"Down Flip Timer Feedback".visible = false
+		%"Up Flip Timer Feedback".play("Progress")
+	else:
+		%"Up Flip Timer Feedback".visible = false
+		%"Down Flip Timer Feedback".play("Progress")
+
 func _process(delta):
 	flipping_animation()
 	if can_move:
 		move_horizontal(delta)
-		"""
-		if can_move_vertical:
-			move_vertical(delta)
-		"""
 
 func flip():
 	flipping = true
@@ -58,6 +73,7 @@ func flip():
 	else:
 		start_rotation = quaternion
 		end_rotation = Quaternion(Vector3(1,0,0), deg_to_rad(180))
+	reset_flip_timer_feedback()
 
 func flipping_animation():
 	if(flipping):
@@ -72,17 +88,28 @@ func flipping_animation():
 		else:
 			quaternion = start_rotation.slerp(end_rotation, t)
 
+func reset_flip_timer_feedback():
+	if(flipped):
+		%"Up Flip Timer Feedback".visible = false
+		%"Up Flip Timer Feedback".stop()
+		%"Down Flip Timer Feedback".visible = true
+		%"Down Flip Timer Feedback".play("Progress")
+	else:
+		%"Down Flip Timer Feedback".visible = false
+		%"Down Flip Timer Feedback".stop()
+		%"Up Flip Timer Feedback".visible = true
+		%"Up Flip Timer Feedback".play("Progress")
+
 func stop_flip_and_move():
 	%"Flip Timer".stop()
 	can_move = false
 	%"Horizontal Move Timer".stop()
-	#%"Vertical Move Timer".stop()
 
 func _on_flip_timer_timeout():
 	flip()
 
-func move_horizontal(delta):
-	var t = (horizontal_move_time - %"Horizontal Move Timer".time_left) / horizontal_move_time
+func move_horizontal(_delta):
+	var t = (%"Horizontal Move Timer".wait_time - %"Horizontal Move Timer".time_left) / %"Horizontal Move Timer".wait_time
 	global_position = start_lerp_position.lerp(end_horizontal_lerp_position, t)
 
 func _on_horizontal_move_timer_timeout():
@@ -95,22 +122,3 @@ func _on_horizontal_move_timer_timeout():
 		moving_right = true
 		start_lerp_position = global_position
 		end_horizontal_lerp_position = start_position + Vector3(0,0,horizontal_max_distance)
-
-"""
-func move_vertical(delta):
-	var t = (vertical_move_time - %"Vertical Move Timer".time_left) / vertical_move_time
-	global_position = start_lerp_position.lerp(end_vertical_lerp_position, t)
-
-func _on_vertical_move_timer_timeout():
-	if(!can_move_vertical):
-		return
-	global_position = end_vertical_lerp_position
-	if(moving_up):
-		moving_up = false
-		start_lerp_position = global_position
-		end_vertical_lerp_position = start_position
-	else:
-		moving_up = true
-		start_lerp_position = global_position
-		end_vertical_lerp_position = start_position + Vector3(vertical_max_distance,0,0)
-"""

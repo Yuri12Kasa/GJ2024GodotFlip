@@ -3,18 +3,19 @@ extends Node3D
 const PLATFORM = preload("res://Platform/Platform.tscn")
 
 var spawn_points = []
+var spawned_platforms = []
 
 func _ready():
 	init_spawn_points_array()
 	spawn_rnd_platform()
 
-func _process(delta):
+func _process(_delta):
 	check_game_over()
 
 func init_spawn_points_array():
 	spawn_points.push_back(%SpawnPoint1)
 	spawn_points.push_back(%SpawnPoint2)
-	spawn_points.push_back(%SpawnPoint3)
+	spawn_points.push_back(%SpawnPoint3) 
 
 func spawn_rnd_platform():
 	var spawn_point_size = spawn_points.size()
@@ -22,7 +23,7 @@ func spawn_rnd_platform():
 	for n in spawn_point_size:
 		spawn_order.push_back(n) 
 	spawn_order.shuffle()
-	var chance_increase = 100 / spawn_point_size 
+	var chance_increase : int = 100 / spawn_point_size 
 	for n in spawn_point_size:
 		var chance = randi_range(0, 100)
 		if (chance <= (chance_increase * (n + 1))):
@@ -30,10 +31,14 @@ func spawn_rnd_platform():
 
 func spawn_platform(spawn_point):
 	var new_platform = PLATFORM.instantiate()
+	spawned_platforms.push_back(new_platform)
 	new_platform.global_position = spawn_point.global_position
-	var new_flip_time = randf_range(new_platform.min_flip_time, new_platform.max_flip_time)
-	new_platform.flip_time = new_flip_time
-	get_tree().current_scene.add_child(new_platform)
+	add_child(new_platform)
+	
+func stop_spawned_platforms():
+	for n in spawned_platforms.size():
+		spawned_platforms[n].stop_flip_and_move()
+	spawned_platforms.clear()
 
 func _on_player_platform_reached(flipped):
 	if flipped:
@@ -47,3 +52,7 @@ func check_game_over():
 
 func game_over():
 	get_tree().reload_current_scene()
+
+
+func _on_player_jump():
+	stop_spawned_platforms()
