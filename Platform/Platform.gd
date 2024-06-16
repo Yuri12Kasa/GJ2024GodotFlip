@@ -131,3 +131,6 @@ func _on_horizontal_move_timer_timeout():
 		moving_right = true
 		start_lerp_position = global_position
 		end_horizontal_lerp_position = start_position + Vector3(0,0,horizontal_max_distance)
+
+func remove():
+	queue_free()

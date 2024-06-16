@@ -38,10 +38,13 @@ func spawn_platform(spawn_point):
 func stop_spawned_platforms():
 	for n in spawned_platforms.size():
 		spawned_platforms[n].stop_flip_and_move()
-	spawned_platforms.clear()
 
-func _on_player_platform_reached(flipped):
-	if flipped:
+func _on_player_platform_reached(platform):
+	for n in spawned_platforms.size():
+		if(platform != spawned_platforms[n]):
+			spawned_platforms[n].remove()
+	spawned_platforms.clear()
+	if platform.flipped:
 		game_over()
 	else:
 		spawn_rnd_platform()
