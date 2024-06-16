@@ -37,4 +37,7 @@ fov = 72.1144
 size = 9.577
 script = ExtResource("3_bpka6")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[connection signal="jump" from="Player" to="." method="_on_player_jump"]
 [connection signal="platform_reached" from="Player" to="." method="_on_player_platform_reached"]

@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0nh34y3lfwl0"]
+[gd_scene load_steps=6 format=3 uid="uid://c0nh34y3lfwl0"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_7qywh"]
+[ext_resource type="Texture2D" uid="uid://by66i5ndpsxvc" path="res://Player/aim.png" id="2_yuo1c"]
+[ext_resource type="Texture2D" uid="uid://c3bn6dlcm00r8" path="res://Player/target.png" id="3_ix2qi"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8crrj"]
 
@@ -11,8 +13,11 @@ radius = 0.167571
 script = ExtResource("1_7qywh")
 jump_destination_speed = 0.05
 jump_duration = 1.0
+default_target_sprite = ExtResource("2_yuo1c")
+on_focus_target_sprite = ExtResource("3_ix2qi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.5, 2.08165e-12)
 shape = SubResource("SphereShape3D_8crrj")
 disabled = true
 
@@ -20,11 +25,13 @@ disabled = true
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23957, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Jump Destination"]
+[node name="Target Collider" type="CollisionShape3D" parent="Jump Destination"]
 shape = SubResource("SphereShape3D_xhsw0")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Jump Destination"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+[node name="Target Sprite" type="Sprite3D" parent="Jump Destination"]
+unique_name_in_owner = true
+transform = Transform3D(-8.74228e-09, 0.2, 8.74228e-09, 0, -8.74228e-09, 0.2, 0.2, 8.74228e-09, 3.82137e-16, 0, 0.169424, 2.08165e-12)
+texture = ExtResource("2_yuo1c")
 
 [node name="Model" type="CSGSphere3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.5, 2.08165e-12)
@@ -34,8 +41,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.08165e-12, 2.08165e-12)
 
 [node name="Max Jump" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.08165e-12, 2.08165e-12)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 
 [node name="Jump Timer" type="Timer" parent="."]
 unique_name_in_owner = true

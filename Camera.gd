@@ -6,7 +6,7 @@ var start_pos_offset
 func _ready():
 	start_pos_offset = global_position
 
-func _process(delta):
+func _process(_delta):
 	compute_position()
 
 func compute_position():

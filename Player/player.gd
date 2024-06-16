@@ -4,7 +4,11 @@ extends CharacterBody3D
 @export var jump_duration : float = 0.5
 @export var jump_height : float = 5
 
+@export var default_target_sprite : Texture 
+@export var on_focus_target_sprite : Texture
+
 signal platform_reached(flipped)
+signal jump()
 
 var gravity = 0
 
@@ -52,8 +56,10 @@ func reset_jump_destination():
 	timer = 0
 	destination_point_up = true
 	%"Jump Destination".hide()
+	%"Target Sprite".texture = default_target_sprite
 
 func start_lerp_player_to_destination():
+	jump.emit()
 	%"Jump Timer".start()
 	is_jumping = true
 	start_position = global_position
@@ -96,8 +102,10 @@ func lerp_jump():
 
 func _on_jump_destination_body_entered(body):
 	if(body.has_method("is_platform")):
+		%"Target Sprite".texture = on_focus_target_sprite
 		target_platform = body
 
 func _on_jump_destination_body_exited(body):
 	if(body.has_method("is_platform") && body == target_platform && !reaching_platform):
+		%"Target Sprite".texture = default_target_sprite
 		target_platform = null
