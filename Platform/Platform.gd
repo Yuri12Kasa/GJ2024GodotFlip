@@ -32,10 +32,15 @@ func _ready():
 
 
 func init_flip_stats():
+	flipped = randi_range(0,1)
+	if(!flipped):
+		quaternion = Quaternion(Vector3(1,0,0), deg_to_rad(0))
+	else:
+		quaternion = Quaternion(Vector3(1,0,0), deg_to_rad(180))
 	%"Flip Timer".wait_time = randf_range(min_flip_time, max_flip_time)
 	%"Flip Timer".start()
-	
 	%"Flipping Timer".wait_time = flipping_time
+
 func init_move_stats():
 	start_position = global_position;
 	
@@ -52,7 +57,7 @@ func init_move_stats():
 func start_flip_timer():
 	%"Up Flip Timer Feedback".speed_scale = 16 / %"Flip Timer".wait_time
 	%"Down Flip Timer Feedback".speed_scale = 16 / %"Flip Timer".wait_time
-	if(!flipped):
+	if(flipped):
 		%"Down Flip Timer Feedback".visible = false
 		%"Up Flip Timer Feedback".play("Progress")
 	else:
@@ -104,6 +109,10 @@ func stop_flip_and_move():
 	%"Flip Timer".stop()
 	can_move = false
 	%"Horizontal Move Timer".stop()
+	%"Up Flip Timer Feedback".visible = false
+	%"Down Flip Timer Feedback".visible = false
+	%"Up Flip Timer Feedback".stop()
+	%"Down Flip Timer Feedback".stop()
 
 func _on_flip_timer_timeout():
 	flip()
