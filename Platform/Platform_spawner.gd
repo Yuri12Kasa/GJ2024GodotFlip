@@ -58,7 +58,7 @@ func check_game_over():
 		game_over()
 
 func game_over():
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://GameOver.tscn")
 
 
 func _on_player_jump():
