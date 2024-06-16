@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0nh34y3lfwl0"]
+[gd_scene load_steps=7 format=3 uid="uid://c0nh34y3lfwl0"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_7qywh"]
 [ext_resource type="Texture2D" uid="uid://by66i5ndpsxvc" path="res://Player/aim.png" id="2_yuo1c"]
 [ext_resource type="Texture2D" uid="uid://c3bn6dlcm00r8" path="res://Player/target.png" id="3_ix2qi"]
+[ext_resource type="PackedScene" uid="uid://go88wu81wxw7" path="res://Player/character.glb" id="4_agqhs"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8crrj"]
 
@@ -34,9 +35,6 @@ unique_name_in_owner = true
 transform = Transform3D(-8.74228e-09, 0.2, 8.74228e-09, 0, -8.74228e-09, 0.2, 0.2, 8.74228e-09, 3.82137e-16, 0, 0.169424, 2.08165e-12)
 texture = ExtResource("2_yuo1c")
 
-[node name="Model" type="CSGSphere3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.5, 2.08165e-12)
-
 [node name="Min Jump" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.08165e-12, 2.08165e-12)
 
@@ -57,6 +55,8 @@ theme_override_font_sizes/font_size = 40
 text = "Score : 0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="character" parent="." instance=ExtResource("4_agqhs")]
 
 [connection signal="body_entered" from="Jump Destination" to="." method="_on_jump_destination_body_entered"]
 [connection signal="body_exited" from="Jump Destination" to="." method="_on_jump_destination_body_exited"]
