@@ -1,13 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://cj0jx4fodak2s"]
+[gd_scene load_steps=10 format=3 uid="uid://cj0jx4fodak2s"]
 
 [ext_resource type="Script" path="res://Platform/Platform_spawner.gd" id="1_5nigo"]
 [ext_resource type="PackedScene" uid="uid://c0nh34y3lfwl0" path="res://Player/player.tscn" id="1_044f0"]
 [ext_resource type="Script" path="res://Camera.gd" id="3_bpka6"]
 [ext_resource type="PackedScene" uid="uid://lf4aa0ptsuhw" path="res://Platform/piattaforma.glb" id="4_36nyf"]
 
+[sub_resource type="Gradient" id="Gradient_es5os"]
+colors = PackedColorArray(0.607216, 0.214746, 0.637606, 1, 0.781524, 0.638447, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gf3np"]
+gradient = SubResource("Gradient_es5os")
+width = 1024
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qfoc4"]
+panorama = SubResource("GradientTexture1D_gf3np")
+
+[sub_resource type="Sky" id="Sky_qptxa"]
+sky_material = SubResource("PanoramaSkyMaterial_qfoc4")
+process_mode = 1
+
 [sub_resource type="Environment" id="Environment_gue18"]
-background_mode = 1
+background_mode = 2
 background_color = Color(0.858648, 0.65928, 0.82658, 1)
+sky = SubResource("Sky_qptxa")
+sky_rotation = Vector3(-4.60243, -0.708604, 0)
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_5nigo")

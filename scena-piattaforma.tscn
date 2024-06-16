@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://ya5k212h81b"]
 
-[ext_resource type="PackedScene" uid="uid://lf4aa0ptsuhw" path="res://piattaforma.glb" id="1_lhq76"]
-[ext_resource type="PackedScene" uid="uid://bt3swxattea26" path="res://spuntoni.glb" id="2_1vibg"]
-[ext_resource type="PackedScene" uid="uid://go88wu81wxw7" path="res://character.glb" id="3_wfnf1"]
+[ext_resource type="PackedScene" uid="uid://lf4aa0ptsuhw" path="res://Platform/piattaforma.glb" id="1_lhq76"]
+[ext_resource type="PackedScene" uid="uid://bt3swxattea26" path="res://Platform/spuntoni.glb" id="2_1vibg"]
+[ext_resource type="PackedScene" uid="uid://go88wu81wxw7" path="res://Player/character.glb" id="3_wfnf1"]
 
 [sub_resource type="Gradient" id="Gradient_khxrq"]
 colors = PackedColorArray(0.950598, 0.557254, 1, 1, 1, 0.780392, 1, 1)
