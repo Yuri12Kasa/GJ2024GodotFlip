@@ -1,9 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8bdyq4c1m27a"]
+[gd_scene load_steps=11 format=3 uid="uid://b8bdyq4c1m27a"]
 
 [ext_resource type="Script" path="res://Replay.gd" id="1_fqtc5"]
+[ext_resource type="Texture2D" uid="uid://bgkgdm1pnnn8k" path="res://background.png" id="1_y61qp"]
 [ext_resource type="Script" path="res://Quit.gd" id="2_2yibj"]
+[ext_resource type="Theme" uid="uid://cimqluqud458q" path="res://Buttons/button_theme.tres" id="2_xy48i"]
+[ext_resource type="Texture2D" uid="uid://s174an6wjf6i" path="res://Buttons/ButtonsStyle14_01.png" id="3_d2oqw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sjw2t"]
+font_size = 25
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ap6xu"]
+texture = ExtResource("3_d2oqw")
+modulate_color = Color(1, 0.772549, 0.862745, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dl462"]
+texture = ExtResource("3_d2oqw")
+modulate_color = Color(0.481789, 0.481789, 0.481789, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0gk0u"]
+texture = ExtResource("3_d2oqw")
+modulate_color = Color(0.677021, 0.249555, 0.305188, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gws77"]
+texture = ExtResource("3_d2oqw")
+modulate_color = Color(0.601947, 0, 0.108224, 1)
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -13,13 +33,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.372549)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 3.0
+offset_right = 2.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_y61qp")
+expand_mode = 3
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.999
-anchor_bottom = 0.52
-offset_right = 0.151855
-offset_bottom = 0.039978
+anchor_bottom = 0.5
+offset_left = 488.0
+offset_top = 170.0
+offset_right = -484.848
+offset_bottom = -76.0
 text = "Game Over"
 label_settings = SubResource("LabelSettings_sjw2t")
 horizontal_alignment = 1
@@ -27,24 +64,56 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="BoxContainer" type="BoxContainer" parent="."]
-layout_mode = 0
-offset_left = 359.0
-offset_top = 225.0
-offset_right = 793.0
-offset_bottom = 385.0
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.364
+anchor_top = 0.347
+anchor_right = 0.652
+anchor_bottom = 0.594
+offset_left = -0.328033
+offset_top = 0.143997
+offset_right = -0.104004
+offset_bottom = 0.0879822
 alignment = 1
 vertical = true
 
-[node name="Replay" type="Button" parent="BoxContainer"]
+[node name="Replay" type="Button" parent="."]
 layout_mode = 2
+anchor_left = 0.437
+anchor_top = 0.458
+anchor_right = 0.586
+anchor_bottom = 0.582
+offset_left = -15.424
+offset_top = -1.78403
+offset_right = -16.072
+offset_bottom = -2.13602
+theme = ExtResource("2_xy48i")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxTexture_ap6xu")
+theme_override_styles/hover = SubResource("StyleBoxTexture_dl462")
 text = "Replay"
+icon_alignment = 1
 script = ExtResource("1_fqtc5")
 
-[node name="Quit" type="Button" parent="BoxContainer"]
+[node name="Quit" type="Button" parent="."]
 layout_mode = 2
+anchor_left = 0.444
+anchor_top = 0.605
+anchor_right = 0.577
+anchor_bottom = 0.699
+offset_left = -15.488
+offset_top = -2.04001
+offset_right = -15.704
+offset_bottom = -1.95203
+pivot_offset = Vector2(0, 2)
+theme = ExtResource("2_xy48i")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxTexture_0gk0u")
+theme_override_styles/hover = SubResource("StyleBoxTexture_gws77")
 text = "Quit"
 icon_alignment = 1
 script = ExtResource("2_2yibj")
 
-[connection signal="pressed" from="BoxContainer/Replay" to="BoxContainer/Replay" method="_on_pressed"]
-[connection signal="pressed" from="BoxContainer/Quit" to="BoxContainer/Quit" method="_on_pressed"]
+[connection signal="pressed" from="Replay" to="Replay" method="_on_pressed"]
+[connection signal="pressed" from="Quit" to="Quit" method="_on_pressed"]
